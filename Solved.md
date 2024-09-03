@@ -81,3 +81,67 @@
 		from film
 		group by genre
 
+## Extension 2:
+
+#### Create director table:
+
+		CREATE TABLE Director(
+	id serial PRIMARY KEY,
+	name VARCHAR(100) NOT NULL
+	);
+
+#### Insert into director table:
+		insert into director
+		(name)
+		VALUES
+		('Frank Darabon'),
+		('Francis Ford Coppola'),
+		('Cristopher Nolan'),
+		('Ridley Scott'),
+		('Paul Verhoven'),
+		('Lana & Lilly Wachowski'),
+		('Lana Wachowski'),
+		('John Mctiernan'),
+		('Rob Reiner'),
+		('Jane Campion'),
+		('David Mackenzie'),
+		('Sergio Leone'),
+		('Clint Eastwood')
+
+#### Alter film to include director:
+
+		ALTER TABLE film
+		ADD directorId INT 
+#### Update directorId to corresponding film records:
+
+	update film
+	set directorid = 1
+	where film.title = 'The Shawshank Redemption';
+	update film
+	set directorid = 2
+	where film.title = 'The Godfater';
+	update film
+	set directorid = 3
+	where film.title = 'The Dark Knight';
+	update film
+	set directorid = 4
+	where film.title = 'Total Recall';
+
+	etc:
+
+#### Return a list of films with their director:
+
+		select film.title, director."name" AS DirectorName
+	from film
+	left join director
+	on film.directorid = director.id
+
+#### Extension 3:
+
+	select director."name" as director, count(film.directorid) AS filmsdirected  from director
+	left join film
+	on director.id = film.directorid
+	group by director
+	order by filmsdirected desc	
+
+	
