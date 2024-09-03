@@ -136,7 +136,8 @@
 	left join director
 	on film.directorid = director.id
 
-#### Extension 3:
+## Extension 3:
+#### Return a list of directors along with the number of films they have directed
 
 	select director."name" as director, count(film.directorid) AS filmsdirected  from director
 	left join film
